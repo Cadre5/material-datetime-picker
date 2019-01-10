@@ -371,12 +371,12 @@ var DateTimePicker = function (_Events) {
         }
       };
 
-      window.addEventListener("keydown", this._onWindowKeypress);
+      window.addEventListener('keydown', this._onWindowKeypress);
     }
   }, {
     key: '_stopListeningForCloseEvents',
     value: function _stopListeningForCloseEvents() {
-      window.removeEventListener("keydown", this._onWindowKeypress);
+      window.removeEventListener('keydown', this._onWindowKeypress);
       this._closeHandler = null;
     }
   }, {
@@ -675,6 +675,9 @@ var DateTimePicker = function (_Events) {
     value: function setTime(time) {
       var m = moment(time);
       var minuteAsInt = Math.round(parseInt(m.format('mm'), 10) / 5) * 5;
+      if (minuteAsInt === 60) {
+        minuteAsInt = 0;
+      }
       m.minutes(minuteAsInt);
 
       var hour = m.format('HH');
@@ -695,8 +698,15 @@ var DateTimePicker = function (_Events) {
         oldActiveMinutes.classList.remove(this.options.styles.clockNum + '--active');
       }
 
-      this.$('.js-clock-hours .' + this.options.styles.clockNum + '[data-number="' + hourAsInt + '"]').classList.add(this.options.styles.clockNum + '--active');
-      this.$('.js-clock-minutes .' + this.options.styles.clockNum + '[data-number="' + minuteAsInt + '"]').classList.add(this.options.styles.clockNum + '--active');
+      var clockHoursElement = this.$('.js-clock-hours .' + this.options.styles.clockNum + '[data-number="' + hourAsInt + '"]');
+      if (clockHoursElement && clockHoursElement.length) {
+        clockHoursElement.classList.add(this.options.styles.clockNum + '--active');
+      }
+
+      var clockMinutesElement = this.$('.js-clock-minutes .' + this.options.styles.clockNum + '[data-number="' + minuteAsInt + '"]');
+      if (clockMinutesElement && clockMinutesElement.length) {
+        clockMinutesElement.classList.add(this.options.styles.clockNum + '--active');
+      }
 
       this.value.hours(m.hours());
       this.value.minutes(m.minutes());

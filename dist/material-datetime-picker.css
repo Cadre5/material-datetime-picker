@@ -21,7 +21,7 @@
   border: 0;
   width: 300px;
   text-align: center;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
   border-radius: 2px;
   opacity: 0;
@@ -169,7 +169,7 @@
   height: 36px; }
 
 .c-datepicker__day-head, c-datepicker__day-body {
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .modal-btns {
   float: right; }
